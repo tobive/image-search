@@ -1,7 +1,7 @@
 var mongoClient = require('mongodb').MongoClient
 
 exports.save = function(query,callback){
-    var url = 'mongodb://localhost:27017/imageproject'
+    var url = process.env.MONGOLAB_URI
     var doc = {
         term : query,
         when : (new Date()).toISOString()
@@ -26,7 +26,7 @@ exports.save = function(query,callback){
 }
 
 exports.get = function(callback){
-    var url = 'mongodb://localhost:27017/imageproject'
+    var url = process.env.MONGOLAB_URI
     mongoClient.connect(url,function(err,db){
         if(!err){
             var collection = db.collection('querylog')
